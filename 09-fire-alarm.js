@@ -29,39 +29,7 @@ board.on('ready', function() {
   led = new five.Led(13);
   button = new five.Button(5);
 
-  temperature.on("data", function(err, data) {
-    if(data.celsius > 50) {
-
-      fire = true;
-
-    }
-    else {
-
-      _disabled = false;
-      fire = false;
-
-    }
-    if(fire && !_disabled) alarm = true;
-
-    //console.dir(data);
-
-    if(!fire) {
-
-      alarm = false;
-      //console.log('offf');
-
-    }
-
-    if(alarm && _sound) {
-
-      _sound = false;
-      soundTheAlarm();
-
-    }
-
-    //console.log(alarm);
-
-  });
+  temperature.on("data", doTheLogic);
 
   button.on('press', function(){
 
@@ -90,5 +58,39 @@ function soundTheAlarm() {
     //console.log('off');
 
   }
+
+}
+
+function doTheLogic(err, data) {
+  if(data.celsius > 50) {
+
+    fire = true;
+
+  }
+  else {
+
+    _disabled = false;
+    fire = false;
+
+  }
+  if(fire && !_disabled) alarm = true;
+
+  //console.dir(data);
+
+  if(!fire) {
+
+    alarm = false;
+    //console.log('offf');
+
+  }
+
+  if(alarm && _sound) {
+
+    _sound = false;
+    soundTheAlarm();
+
+  }
+
+  //console.log(alarm);
 
 }
