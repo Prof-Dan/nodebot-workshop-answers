@@ -16,11 +16,11 @@ board.on('ready', function() {
 
   var server = dnode({
 
-    getTemperature: function() {
+    getTemperature: function(cb) {
 
       console.log('getTemperature');
 
-      this.end(temp);
+      cb(temp);
 
     }
 
